@@ -10,6 +10,12 @@ const data = require('./data.js')
 app.use(morgan('common'))
 app.use(cors())
 
+
+app.get('/', (req, res) => {
+  res.send('Hello Express!')
+})
+
+
 app.get('/apps', (req, res) => {
 
   let { genre, sort } = req.query
@@ -25,7 +31,7 @@ app.get('/apps', (req, res) => {
     }
   }
 
-  if(!genre) {
+  if(!genre && !sort) {
     return res  
       .send(data)
   }
@@ -63,6 +69,5 @@ app.get('/apps', (req, res) => {
 
 })
 
-app.listen(8000, () => {
-  console.log('Server started on PORT 8000');
-})
+
+module.exports = app
